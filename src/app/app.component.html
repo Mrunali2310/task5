@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+</head>
+<body>
+  <div class="header">
+    <img src="assets/header.png">
+  </div>
+  <div class="vertical">
+    <img src="assets/Group 16.png">
+  </div>
+  <div class="horizantal">
+    <img src="assets/summary.png">
+  </div>
+  <div class="horidiv">
+    <img src="assets/chart.png">
+  </div>
+  <div class="vertdiv">
+    <img src="assets/Group 56.png">
+  </div>
+  <div class="saving">
+    <table>
+        <thead>
+          <tr class="row0">
+            <th class="col1">My Savings</th>
+            <th class="col2">viewall</th>
+            <th class="col3">COMPLETION</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let item of UserData">
+            <tr>
+              <td>
+                {{ item.Class }}
+                <div class="progress-wrapper">
+                  <progress [value]="item.COMPLETION" max="1200" [ngStyle]="getProgressBarStyles(item.COMPLETION)"></progress>
+                  <span class="progress-percentage">${{ item.COMPLETION }}</span>
+                </div>
+              </td>
+              <td class="Gender">{{ item.Gender }}</td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
+    <div class="history">
+      <table>
+        <thead>
+          <tr class="row1">
+            <th class="colm1">History Transactions</th>
+            <th class="colm2">viewall</th>
+            <th class="colm3">COMPLETION</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let data of HistoryData">
+            <tr>
+              <td class="class1">
+                <div class="transaction-details">
+                  <div class="transaction-name">{{ data.Class }}</div>
+                  <div class="transaction-date">{{ data.date }}</div>
+                </div>
+              </td>
+              <td class="Gender1">{{ data.Gender }}</td>
+            </tr>
+            <tr *ngIf="data.transactionType === 'Send Money'">
+             </tr>
+          </ng-container>
+          <div class="send-bar-info">{{ sendDate }} - {{ sendType }} </div>
+              <div class="error-message" *ngIf="sendError">{{ sendError }}</div>
+               </tbody>
+      </table>
+    </div>
+    
+     <div class="quick">Quick Transfer
+
+      <div class="icon">
+        <img src="assets/Group 12.png">
+        <td colspan="3" class="send-bar">
+          <div class="send-bar-icon">
+            <img src="assets/send-money-icon.png" alt="Send Money Icon">
+          </div>
+          <div class="send-bar-details">
+            <div class="send-bar-amount">
+              <input type="text" [(ngModel)]="sendAmount" placeholder="Enter amount" (input)="onAmountChange($event)">
+              <button (click)="sendMoney()" [disabled]="!sendAmount || sendingMoney" class="send-button">Send Money</button>
+            </div>
+           
+            
+<
+          </div>
+        </td>
+      </div>
+    </div>
+      
+  
+    
+  </body>
+</html>
